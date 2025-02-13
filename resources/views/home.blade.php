@@ -25,6 +25,7 @@
                     <th>投稿内容</th>
                     <th>投稿日時</th>
                     <th>変更日時</th>
+                    <th>アクション</th> <!-- 新しい列を追加 -->
                 </tr>
                 @foreach($posts as $post)
                 <tr>
@@ -44,6 +45,22 @@
                         </form>
                     </td>
                 @endif
+                 <td>
+                       @if(auth()->user()->name !== $post->user_name) <!-- 現在のユーザーの投稿にはフォローボタンを表示しない -->
+                        @if(auth()->user()->isFollowing($post->user)) <!-- フォロー中かどうかを確認 -->
+                            <form method="POST" action="{{ route('follows.destroy', $post->user->id) }}" style="display: inline;" >
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-dark">フォロー中</button> <!-- フォロー中のボタン -->
+                            </form>
+                        @else
+                            <form method="POST" action="{{ route('follows.store', $post->user->id) }}" style="display: inline;">
+                                @csrf
+                                <button type="submit" class="btn btn-success">フォロー</button> <!-- フォローボタン -->
+                            </form>
+                        @endif
+                    @endif
+                    </td>
                 </tr>
                 @endforeach
             </table>

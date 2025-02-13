@@ -58,6 +58,12 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+
+                                    <a class="dropdown-item" href="{{ route('profiles.show', Auth::user()->id) }}">プロフィール</a>
+                                    <!-- プロフィールボタンの追加 -->
+
+                                    <a class="dropdown-item" href="{{ route('users.search') }}">ユーザー検索</a> <!-- ユーザー検索ボタンの追加 -->
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
