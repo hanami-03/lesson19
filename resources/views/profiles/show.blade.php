@@ -16,32 +16,14 @@
     <p>メールアドレス: {{ $user->email }}</p>
 
     <div class="row">
-        <!-- フォロー一覧ドロップダウン -->
+        <!-- フォロー一覧ボタン -->
         <div class="col-md-6">
-            <div class="dropdown">
-                <button class="btn btn-info dropdown-toggle" type="button" id="followingDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    フォロー一覧 ({{ $user->follows->count() }}人)
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="followingDropdown">
-                    @foreach($user->follows as $followedUser)
-                        <li><a class="dropdown-item" href="{{ route('profiles.show', $followedUser->id) }}">{{ $followedUser->name }}</a></li>
-                    @endforeach
-                </ul>
-            </div>
+            <a href="{{ route('follow.follows', $user->id) }}" class="btn btn-info">フォロー一覧 ({{ $user->follows->count() }}人)</a>
         </div>
 
-        <!-- フォロワー一覧ドロップダウン -->
+        <!-- フォロワー一覧ボタン -->
         <div class="col-md-6">
-            <div class="dropdown">
-                <button class="btn btn-info dropdown-toggle" type="button" id="followersDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    フォロワー一覧 ({{ $user->followers->count() }}人)
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="followersDropdown">
-                    @foreach($user->followers as $follower)
-                        <li><a class="dropdown-item" href="{{ route('profiles.show', $follower->id) }}">{{ $follower->name }}</a></li>
-                    @endforeach
-                </ul>
-            </div>
+            <a href="{{ route('follow.followers', $user->id) }}" class="btn btn-info">フォロワー一覧 ({{ $user->followers->count() }}人)</a>
         </div>
     </div>
 

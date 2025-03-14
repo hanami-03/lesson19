@@ -40,4 +40,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/users/search', [UserController::class, 'search'])->name('users.search'); // 検索画面へのルート
     Route::get('/profiles/{user}/edit', [ProfileController::class, 'edit'])->name('profiles.edit'); // 編集画面へのルート
     Route::put('/profiles/{user}', [ProfileController::class, 'update'])->name('profiles.update'); // プロフィール更新のルート
+    Route::get('/follows/{user}', [FollowController::class, 'index'])->name('follow.follows'); // フォロー一覧
+    Route::get('/followers/{user}', [FollowController::class, 'followers'])->name('follow.followers'); // フォロワー一覧
 });

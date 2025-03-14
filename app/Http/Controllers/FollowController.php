@@ -20,4 +20,16 @@ class FollowController extends Controller
         auth()->user()->follows()->detach($user->id);
         return redirect()->back()->with('message', 'フォローを解除しました');
     }
+
+    public function index(User $user)
+{
+    $follows = $user->follows; // フォローしているユーザー
+    return view('follow.follows', compact('follows'));
+}
+
+public function followers(User $user)
+{
+    $followers = $user->followers; // フォロワー
+    return view('follow.followers', compact('followers'));
+}
 }
