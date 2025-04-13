@@ -23,6 +23,11 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+Route::get('/register/complete', function () {
+    $userName = session('user_name');
+    return view('auth.register-complete', compact('userName'));
+})->name('register.complete');
+
 Auth::routes();
 
 

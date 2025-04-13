@@ -18,7 +18,7 @@ class PostController extends Controller
   {
 
     $request->validate([
-        'content' => 'required|string|max:100|regex:/^[^\x{3000}]+$/u',
+        'content' => 'required|string|max:150|regex:/^[^\x{3000}]+$/u',
     ]);
 
 
@@ -40,7 +40,7 @@ class PostController extends Controller
   public function update(Request $request, Post $post)
   {
     $request->validate([
-        'content' => 'required|string|max:100|regex:/^[^\x{3000}]+$/u',
+        'content' => 'required|string|max:150|regex:/^[^\x{3000}]+$/u',
     ]);
 
         $post->contents = $request->input('content');

@@ -52,9 +52,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'name' => ['required', 'string', 'max:255', 'regex:/^[^\x{3000}]+$/u'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users', 'regex:/^[^\x{3000}]+$/u'],
+            'password' => ['required', 'string', 'min:8', 'confirmed', 'regex:/^[^\x{3000}]+$/u'],
         ]);
     }
 
@@ -66,19 +66,19 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $user = User::create([
+        return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
     }
 
-        public function register(Request $request)
+    public function register(Request $request)
     {
         $this->validator($request->all())->validate();
 
-        $this->create($request->all());
+        $user = $this->create($request->all());
 
-        return Redirect::route('login')->with('message', '登録が完了しました。ログインしてください。');
+        return Redirect::route('register.complete')->with('user_name', $user->name);
     }
 }
